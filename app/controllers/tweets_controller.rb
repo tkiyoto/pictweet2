@@ -11,7 +11,11 @@ class TweetsController < ApplicationController
 
   def create
     Tweet.create(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+  end
 
+  def show
+    @tweet = Tweet.find(params[:id])
+    @comments = @tweet.comments.includes(:user)
   end
 
   def destroy
